@@ -1,4 +1,4 @@
-package ru.netology.delyvery.web;
+package ru.netology.delivery.web;
 
 import com.codeborne.selenide.SelenideElement;
 import org.junit.jupiter.api.Test;
