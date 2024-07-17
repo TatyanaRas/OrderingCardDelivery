@@ -34,6 +34,6 @@ class DeliveryTest {
         $("[data-test-id=phone] input").setValue("+79012345678");
         $("[data-test-id=agreement]").click();
         $("button.button").click();
-        $(".notification_content").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate));
-           }
+        $("#root > div > div > div.notification__content").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate));
+           }//#root > div > div > div.notification__content
 }
