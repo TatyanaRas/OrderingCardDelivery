@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.exactText;
 import com.codeborne.selenide.Selenide;
+import org.openqa.selenium.Keys;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.withText;
@@ -28,12 +29,12 @@ class DeliveryTest {
         String planningDate = dateSelection(4, "dd.MM.yyyy");
 
         $("[data-test-id=date] input").doubleClick();
-        $("[data-test-id=date] input").sendKeys(" ");
+        $("[data-test-id=date] input").sendKeys(Keys.DELETE);
         $("[data-test-id=date] input").setValue(planningDate);
         $("[data-test-id=name] input").setValue("Иванова Юлия");
         $("[data-test-id=phone] input").setValue("+79012345678");
         $("[data-test-id=agreement]").click();
         $("button.button").click();
-        $("#root > div > div > div.notification__content").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate));
-           }//#root > div > div > div.notification__content
+        $(".notification__content").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate));
+           }
 }
