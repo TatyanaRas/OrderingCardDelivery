@@ -9,6 +9,9 @@ import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.exactText;
 import com.codeborne.selenide.Selenide;
+
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 class DeliveryTest {
@@ -22,16 +25,15 @@ class DeliveryTest {
         open("http://localhost:9999");
 
         $("[data-test-id=city] input").setValue("Казань");
-        String planningDate = dateSelection(4, "DD.MM.YYYY");
+        String planningDate = dateSelection(4, "dd.MM.yyyy");
 
         $("[data-test-id=date] input").doubleClick();
-        $("[data-test-id=date] input").sendKeys("Keys.DELETE");
-        $("[data-test-id=date] input").setValue("planningDate");
+        $("[data-test-id=date] input").sendKeys(" ");
+        $("[data-test-id=date] input").setValue(planningDate);
         $("[data-test-id=name] input").setValue("Иванова Юлия");
         $("[data-test-id=phone] input").setValue("+79012345678");
         $("[data-test-id=agreement]").click();
         $("button.button").click();
-        $("notification__content").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate));
-
-    }
+        $(".notification_content").shouldBe(Condition.visible, Duration.ofSeconds(15)).shouldHave(Condition.text("Встреча успешно забронирована на " + planningDate));
+           }
 }
